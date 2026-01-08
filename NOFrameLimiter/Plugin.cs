@@ -11,6 +11,7 @@ namespace NOFrameLimiter
     public class Plugin : BaseUnityPlugin
     {
         internal static new ManualLogSource? Logger;
+        static int internalTargetFramerate = -1;
         private void Awake()
         {
             // Plugin startup logic
@@ -19,14 +20,16 @@ namespace NOFrameLimiter
             Logger.LogInfo($"Plugin NOFrameLimiter is loaded!");
             Logger.LogInfo($"FrameRateLimit: {Configuration.FrameRateLimit.Value}");
             Application.targetFrameRate = Configuration.FrameRateLimit.Value;
+            internalTargetFramerate = Application.targetFrameRate;
             SetTargetFrameRate();
         }
 
         private void Update()
         {
-            if (Application.targetFrameRate != Configuration.FrameRateLimit.Value)
+            if (internalTargetFramerate != Configuration.FrameRateLimit.Value)
             {
                 SetTargetFrameRate();
+                Logger.LogInfo($"FrameRateLimit: {Application.targetFrameRate}");
             }
 
         }
@@ -36,11 +39,15 @@ namespace NOFrameLimiter
             if (Configuration.FrameRateLimit.Value < 1)
             {
                 Application.targetFrameRate = -1;
+                internalTargetFramerate = Application.targetFrameRate + 1;
+                return;
             } else
             {
                 Application.targetFrameRate = Configuration.FrameRateLimit.Value;
+                internalTargetFramerate = Application.targetFrameRate;
+                return;
             }
-            Logger.LogInfo($"FrameRateLimit: {Application.targetFrameRate}");
+            
         }
     }
 
