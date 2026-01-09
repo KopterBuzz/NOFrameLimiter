@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace NOFrameLimiter
 {
-    [BepInPlugin("KopterBuzz.NOFrameLimiter", "NOFrameLimiter", "0.0.1")]
+    [BepInPlugin("KopterBuzz.NOFrameLimiter", "NOFrameLimiter", "0.0.2")]
     [BepInProcess("NuclearOption.exe")]
     public class Plugin : BaseUnityPlugin
     {
