@@ -12,7 +12,7 @@ Installation Instructions:
 	[BepInEx Installation Guide.](https://docs.bepinex.dev/articles/user_guide/installation/index.html#where-to-download-bepinex)
 2. After installing BepInEx, run the game once so BepInEx can generate its default directory and file structure.
 3. Copy the NOFrameLimiter.dll file to the game's BepInEx plugins folder.
-4. After you loaded the plugin once, there will be a KopterBuzz.NOFrameLimiter.cfg in the game's BepInEx/Plugins Folder. You can set the FPS Limit there by changing the FrameRateLimitValue:
+4. After you loaded the plugin once, there will be a KopterBuzz.NOFrameLimiter.cfg in the game's BepInEx/Plugins Folder. You can set the FPS Limit there by changing the FrameRateLimit value:
 ```
 ## Settings file was created by plugin NOFrameLimiter v0.0.1
 ## Plugin GUID: KopterBuzz.NOFrameLimiter
