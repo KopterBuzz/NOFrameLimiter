@@ -19,7 +19,7 @@ Installation Instructions:
 
 [General Settings]
 
-## Maximum Desired Frame Rate. 0 = Unlimited. Default = 60
+## Maximum Desired Frame Rate. -1 = Unlimited. Default = 60
 # Setting type: Int32
 # Default value: 60
 FrameRateLimit = 60
