@@ -11,7 +11,6 @@ namespace NOFrameLimiter
     public class Plugin : BaseUnityPlugin
     {
         internal static new ManualLogSource? Logger;
-        static int internalTargetFramerate = -1;
         private void Awake()
         {
             // Plugin startup logic
@@ -19,14 +18,12 @@ namespace NOFrameLimiter
             Logger = base.Logger;
             Logger.LogInfo($"Plugin NOFrameLimiter is loaded!");
             Logger.LogInfo($"FrameRateLimit: {Configuration.FrameRateLimit.Value}");
-            Application.targetFrameRate = Configuration.FrameRateLimit.Value;
-            internalTargetFramerate = Application.targetFrameRate;
             SetTargetFrameRate();
         }
 
         private void Update()
         {
-            if (internalTargetFramerate != Configuration.FrameRateLimit.Value)
+            if (Application.targetFrameRate != Configuration.FrameRateLimit.Value)
             {
                 SetTargetFrameRate();
                 Logger.LogInfo($"FrameRateLimit: {Application.targetFrameRate}");
@@ -36,18 +33,7 @@ namespace NOFrameLimiter
 
         private static void SetTargetFrameRate()
         {
-            if (Configuration.FrameRateLimit.Value < 1)
-            {
-                Application.targetFrameRate = -1;
-                internalTargetFramerate = Application.targetFrameRate + 1;
-                return;
-            } else
-            {
-                Application.targetFrameRate = Configuration.FrameRateLimit.Value;
-                internalTargetFramerate = Application.targetFrameRate;
-                return;
-            }
-            
+            Application.targetFrameRate = Configuration.FrameRateLimit.Value;            
         }
     }
 
@@ -59,7 +45,7 @@ namespace NOFrameLimiter
         internal static void InitSettings(ConfigFile config)
         {
             Plugin.Logger?.LogInfo("Loading Settings.");
-            FrameRateLimit = config.Bind(GeneralSettings, "FrameRateLimit", DefaultFrameRateLimit, $"Maximum Desired Frame Rate. 0 = Unlimited. Default = {DefaultFrameRateLimit}");
+            FrameRateLimit = config.Bind(GeneralSettings, "FrameRateLimit", DefaultFrameRateLimit, $"Maximum Desired Frame Rate. -1 = Unlimited. Default = {DefaultFrameRateLimit}");
         }
     }
 }
